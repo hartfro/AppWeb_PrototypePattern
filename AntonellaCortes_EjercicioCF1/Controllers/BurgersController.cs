@@ -54,7 +54,7 @@ namespace AntonellaCortes_EjercicioCF1.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,WithCheese,WithTomatoes,Price")] Burger burger)
+        public async Task<IActionResult> Create([Bind("Id,Name,WithCheese,WithTomatoes,Price,Revenue,HideRevenue")] Burger burger)
         {
             if (ModelState.IsValid)
             {
@@ -86,7 +86,7 @@ namespace AntonellaCortes_EjercicioCF1.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,WithCheese,WithTomatoes,Price")] Burger burger)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,WithCheese,WithTomatoes,Price,Revenue,HideRevenue")] Burger burger)
         {
             if (id != burger.Id)
             {
