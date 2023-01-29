@@ -65,6 +65,23 @@ namespace AntonellaCortes_EjercicioCF1.Controllers
             return View(burger);
         }
 
+        public async Task<IActionResult> Clone(int? id)
+        {
+            if (id == null || _context.Burger == null)
+            {
+                return NotFound();
+            }
+
+            var burger = await _context.Burger
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (burger == null)
+            {
+                return NotFound();
+            }
+
+            return View(burger);
+        }
+
         // GET: Burgers/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
