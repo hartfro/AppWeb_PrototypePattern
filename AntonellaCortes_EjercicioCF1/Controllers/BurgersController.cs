@@ -12,7 +12,7 @@ namespace AntonellaCortes_EjercicioCF1.Controllers
 {
     public class BurgersController : Controller
     {
-        private readonly AntonellaCortes_EjercicioCF1Context _context;
+        private AntonellaCortes_EjercicioCF1Context _context;
 
         public BurgersController(AntonellaCortes_EjercicioCF1Context context)
         {
@@ -40,6 +40,8 @@ namespace AntonellaCortes_EjercicioCF1.Controllers
                 return NotFound();
             }
 
+            
+
             return View(burger);
         }
 
@@ -65,19 +67,17 @@ namespace AntonellaCortes_EjercicioCF1.Controllers
             return View(burger);
         }
 
-        public async Task<IActionResult> Clone(int? id)
+        public async Task<IActionResult> Clone([Bind("Id,Name,WithCheese,WithTomatoes,Price,Revenue,HideRevenue")] Burger burger)
         {
-            if (id == null || _context.Burger == null)
+            if(ModelState.IsValid)
             {
-                return NotFound();
+                burger.Id = 0;
+                _context.Add(burger);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
             }
 
-            var burger = await _context.Burger
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (burger == null)
-            {
-                return NotFound();
-            }
+
 
             return View(burger);
         }
@@ -95,6 +95,9 @@ namespace AntonellaCortes_EjercicioCF1.Controllers
             {
                 return NotFound();
             }
+
+            
+
             return View(burger);
         }
 
